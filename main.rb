@@ -1,4 +1,4 @@
-require 'rubygems'
+require 'sinatra'
 require 'sinatra/base'
 require 'logger'
 require 'unicorn'
