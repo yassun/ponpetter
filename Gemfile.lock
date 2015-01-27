@@ -20,6 +20,7 @@ GEM
     buftok (0.2.0)
     builder (3.2.2)
     diff-lcs (1.2.5)
+    dotenv (1.0.2)
     equalizer (0.0.9)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
@@ -98,6 +99,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord
+  dotenv
   haml
   pg
   rspec

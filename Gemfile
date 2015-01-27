@@ -7,6 +7,8 @@ gem 'sinatra-contrib'
 gem 'sinatra-activerecord'
 gem 'activerecord'
 
+gem 'dotenv'
+
 gem 'twitter'
 
 gem 'haml'
