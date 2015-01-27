@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + '/spec_helper'
 describe "App" do
   include Rack::Test::Methods
   def app
-    @app ||= MainApp
+    @app ||= Sinatra::Application
   end
 
   describe "GET /" do
