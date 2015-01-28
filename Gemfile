@@ -13,6 +13,8 @@ gem 'sass'
 
 gem 'unicorn'
 
+gem 'whenever', :require => false
+
 group :development, :test do
   gem 'rspec'
 end
