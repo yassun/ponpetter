@@ -13,7 +13,7 @@ module Ponpetter
       client.search(KEYWORD, result_type: 'recent', since_id: @since_id).take(100).to_a.reverse.map do |tweet|
         {
           id: tweet.id,
-          img: tweet.user.profile_image_url,
+          img: tweet.user.profile_image_url.to_s,
           autor: tweet.user.screen_name,
           text: tweet.text,
           time: tweet.created_at,
