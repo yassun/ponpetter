@@ -13,7 +13,7 @@ module Ponpetter
 
       # tweetの更新
       tweets = TweetSearch.new(since_id).run
-      redis.set("tweets", tweets)
+      redis.set("tweets",  Marshal.dump(tweets))
 
       # ポンペ数の更新
       today = Date.today.to_s
