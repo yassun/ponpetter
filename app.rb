@@ -1,16 +1,21 @@
 require 'sinatra'
 require 'logger'
 require 'unicorn'
-require 'haml'
-require 'sass'
+require File.join(File.dirname(__FILE__), 'app', 'redis.rb')
+
+configure :development, :test do
+  require 'dotenv'
+  Dotenv.load
+end
 
 # root
 get '/' do
-    haml :index
+
+  # redisに接続
+  redis = Ponpetter::Redis.connect
+  @tweets = Marshal.load(redis.get("tweets"))
+
+  erb :index
 end
 
-# css
-get %r{^/(.*)\.css$} do
-    scss :"style/#{params[:captures].first}"
-end
 
