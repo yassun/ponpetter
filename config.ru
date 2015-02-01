@@ -1,2 +1,2 @@
-require File.dirname(__FILE__) + '/main.rb'
+require File.dirname(__FILE__) + '/app.rb'
 run MainApp.new
