@@ -11,9 +11,11 @@ end
 # root
 get '/' do
 
-  # redisに接続
   redis = Ponpetter::Redis.connect
   @tweets = Marshal.load(redis.get("tweets"))
+
+  @today = Date.today.to_s
+  @ponpe_cnt = redis.get(@today)
 
   erb :index
 end
