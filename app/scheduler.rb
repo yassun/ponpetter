@@ -22,7 +22,7 @@ module Ponpetter
       redis.set(today, ponpe_cnt)
 
       # since_idの更新
-      since_id = tweets.last[:id] || 0
+      since_id = tweets.first[:id] || 0
       redis.set("since_id", since_id)
 
     end
