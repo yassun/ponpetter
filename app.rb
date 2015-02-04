@@ -13,9 +13,7 @@ get '/' do
 
   redis = Ponpetter::Redis.connect
   @tweets = Marshal.load(redis.get("tweets"))
-
-  @today = Date.today.to_s
-  @ponpe_cnt = redis.get(@today)
+  @ponpe_cnt = redis.get('ponpe-cnt')
 
   erb :index
 end

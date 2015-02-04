@@ -9,21 +9,20 @@ module Ponpetter
       redis = Ponpetter::Redis.connect
 
       # since_idを取得
-      since_id = redis.get("since_id") || 0
+      since_id = redis.get('since_id') || 0
 
       # tweetの更新
       tweets = TweetSearch.new(since_id).run
       redis.set("tweets",  Marshal.dump(tweets))
 
       # ポンペ数の更新
-      today = Date.today.to_s
-      ponpe_cnt = redis.get(today) || 0
+      ponpe_cnt = redis.get('ponpe-cnt') || 0
       ponpe_cnt = ponpe_cnt.to_i + tweets.length
-      redis.set(today, ponpe_cnt)
+      redis.set('ponpe-cnt', ponpe_cnt)
 
       # since_idの更新
       since_id = tweets.first[:id] || 0
-      redis.set("since_id", since_id)
+      redis.set('since_id', since_id)
 
     end
   end
