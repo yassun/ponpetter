@@ -11,7 +11,7 @@ describe "App" do
       allow(Date).to receive(:today).and_return(Date.new(2015, 2, 1))
 
       mr = MockRedis.new
-      mr.set('2015-02-01', 100)
+      mr.set('ponpe-cnt', 100)
       tweets = [
         {
           id: 1234567890,
@@ -33,10 +33,6 @@ describe "App" do
 
     it 'ステータスコード200を返すこと' do
       expect(subject.status).to be 200
-    end
-
-    it '集計時点の日付が表示されていること' do
-      expect(subject.body).to include '<p>2015-02-01</p>'
     end
 
     it 'ツイート合計数が表示されていること' do
