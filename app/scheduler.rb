@@ -8,6 +8,29 @@ module Ponpetter
       # redisに接続
       redis = Ponpetter::Redis.connect
 
+     # 処理日付の取得
+      today = Date.today.to_s
+
+      # 前回処理日付の取得
+      last_date = redis.get('last-date') || today
+
+      # 日替わり発生時
+      unless last_date == today
+
+        # ポンペ数をグラフデータに移動
+        time_stamp = Time.now.to_i
+        ponpe_cnt = redis.get('ponpe-cnt')
+        redis.zadd('graph-labels', time_stamp, last_date)
+        redis.zadd('graph-values', time_stamp, ponpe_cnt)
+
+        # ポンペ数を初期化
+        redis.set('ponpe-cnt', 0)
+
+        # 処理日付の変更
+        redis.set('last_date', today)
+
+      end
+
       # since_idを取得
       since_id = redis.get('since_id') || 0
 
