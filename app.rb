@@ -11,9 +11,13 @@ end
 # root
 get '/' do
 
-  redis = Ponpetter::Redis.connect
+  redis   = Ponpetter::Redis.connect
   @tweets = Marshal.load(redis.get("tweets"))
   @ponpe_cnt = redis.get('ponpe-cnt')
+  @graph = {
+    labels:redis.zrange('graph-labels', 0, -1),
+    values:redis.zrange('graph-values', 0, -1)
+  }
 
   erb :index
 end
