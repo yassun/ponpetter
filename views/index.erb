@@ -17,6 +17,50 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/Chart.min.js"></script>
+  <script>
+    $(document).ready(function(){
+        var data = {
+          labels : <%= @graph[:labels] %>,
+          datasets : [
+            {
+              fillColor : "rgba(0,180,255,0.1)",
+              strokeColor : "#66ccff",
+              pointColor : "#66ccff",
+              pointStrokeColor : "#fff",
+              data : <%= @graph[:values] %>
+            }
+          ]
+        }
+
+        var ctx = document.getElementById("myChart").getContext("2d");
+        new Chart(ctx).Line(data,{
+          scaleOverlay : false,
+          scaleLineColor : "#ccc",
+          scaleLineWidth : 1,
+          scaleShowLabels : true,
+          scaleLabel : "<%%=value%>",
+          scaleFontFamily : "'Arial'",
+          scaleFontSize : 11,
+          scaleFontStyle : "normal",
+          scaleFontColor : "#ccc",
+          scaleShowGridLines : false,
+          scaleGridLineColor : "#ccc",
+          scaleGridLineWidth : 1,
+          bezierCurve : false,
+          pointDot : true,
+          pointDotRadius : 6,
+          pointDotStrokeWidth : 0,
+          datasetStroke : true,
+          datasetStrokeWidth : 3,
+          datasetFill : true,
+          animation : true,
+          animationSteps : 60,
+          animationEasing : "easeOutQuart",
+          onAnimationComplete : null
+        });
+        });
+  </script>
+
 </head>
 
 
@@ -30,8 +74,8 @@
         <h2>只今のポンペ数 <%= @ponpe_cnt %>人</h2>
       </div>
 
-      <div class="jumbotron">
-        <h1>GraphArea</h1>
+      <div id="chart" class="text-center">
+          <canvas id="myChart" width="600" height="200"></canvas>
       </div>
 
       <div class="row tweets">
