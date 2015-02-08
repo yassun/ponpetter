@@ -36,3 +36,7 @@
   padding: 25px 0 0 70px;
 }
 
+body > div.container > div.header > h3 > span {
+    font-size: 14px;
+}
+
