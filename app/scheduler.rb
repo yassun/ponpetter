@@ -27,12 +27,12 @@ module Ponpetter
         redis.set('ponpe-cnt', 0)
 
         # 処理日付の変更
-        redis.set('last_date', today)
+        redis.set('last-date', today)
 
       end
 
       # since_idを取得
-      since_id = redis.get('since_id') || 0
+      since_id = redis.get('since-id') || 0
 
       # tweetの更新
       tweets = TweetSearch.new(since_id).run
@@ -45,7 +45,7 @@ module Ponpetter
 
       # since_idの更新
       since_id = tweets.first[:id] || 0
-      redis.set('since_id', since_id)
+      redis.set('since-id', since_id)
 
     end
   end
