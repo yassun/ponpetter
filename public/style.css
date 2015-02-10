@@ -40,3 +40,8 @@ body > div.container > div.header > h3 > span {
     font-size: 14px;
 }
 
+.tweet-btn {
+  text-align: center;
+  padding-top: 10px;
+}
+
