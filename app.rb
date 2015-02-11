@@ -15,8 +15,8 @@ get '/' do
   @tweets = Marshal.load(redis.get("tweets"))
   @ponpe_cnt = redis.get('ponpe-cnt')
   @graph = {
-    labels:redis.zrange('graph-labels', 0, -1),
-    values:redis.zrange('graph-values', 0, -1)
+    labels:redis.zrange('graph-labels', 0, 30),
+    values:redis.zrange('graph-values', 0, 30)
   }
 
   erb :index
