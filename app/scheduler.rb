@@ -3,6 +3,7 @@ require File.dirname(__FILE__) + '/tweet_search.rb'
 
 module Ponpetter
   class Scheduler
+    MAX_COUNT = 365
     def self.execute
 
       # redisに接続
@@ -28,6 +29,10 @@ module Ponpetter
 
         # 処理日付の変更
         redis.set('last-date', today)
+
+        # 最大格納数を超える場合は削除
+        redis.zremrangebyrank('graph-labels', 0, -(MAX_COUNT + 1))
+        redis.zremrangebyrank('graph-values', 0, -(MAX_COUNT + 1))
 
       end
 
