@@ -16,7 +16,7 @@ module Ponpetter
       last_date = redis.get('last-date') || today
 
       # 日替わり発生時
-      unless last_date == today
+      if last_date != today
 
         # ポンペ数をグラフデータに移動
         time_stamp = Time.now.to_i
@@ -26,9 +26,6 @@ module Ponpetter
 
         # ポンペ数を初期化
         redis.set('ponpe-cnt', 0)
-
-        # 処理日付の変更
-        redis.set('last-date', today)
 
         # 最大格納数を超える場合は削除
         redis.zremrangebyrank('graph-labels', 0, -(MAX_COUNT + 1))
@@ -51,6 +48,9 @@ module Ponpetter
       # since_idの更新
       since_id = tweets.first[:id] || 0
       redis.set('since-id', since_id)
+
+      # 処理日付の変更
+      redis.set('last-date', today)
 
     end
   end
