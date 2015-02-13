@@ -1,4 +1,5 @@
 require File.join(File.dirname(__FILE__), '..', 'app.rb')
+require File.join(File.dirname(__FILE__), '..', 'app', 'tweet_search.rb')
 require File.join(File.dirname(__FILE__), '..', 'app', 'scheduler.rb')
 require File.join(File.dirname(__FILE__), '..', 'app', 'redis.rb')
 
