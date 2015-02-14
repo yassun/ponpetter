@@ -46,5 +46,27 @@ describe "Scheduler" do
     it "ポンペ数が更新されていること" do
       expect(mr.get('ponpe-cnt')).to eq "1"
     end
+
+    context "日替わり発生時" do
+      before do
+        mr.set('last-date','2014-01-31')
+        mr.set('ponpe-cnt','100')
+        Ponpetter::Scheduler.execute
+      end
+
+      it "グラフのラベルが追加されていること" do
+        expect(mr.zrange('graph-labels', 0, 30)).to match_array ["2014-01-31"]
+      end
+
+      it "グラフの値が追加されていること" do
+        expect(mr.zrange('graph-values', 0, 30)).to match_array ["100"]
+      end
+
+      it "ポンペ数が初期化されていること" do
+        expect(mr.get('ponpe-cnt')).to eq "1"
+      end
+
+    end
+
   end
 end
