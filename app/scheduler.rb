@@ -5,7 +5,6 @@ module Ponpetter
   class Scheduler
     MAX_COUNT = 365
     def self.execute
-
       # redisに接続
       redis = Ponpetter::Redis.connect
 
@@ -19,18 +18,18 @@ module Ponpetter
       if last_date != today
 
         # ポンペ数をグラフデータに移動
-        time_stamp = Time.now.to_i
         ponpe_cnt = redis.get('ponpe-cnt')
-        redis.zadd('graph-labels', time_stamp, last_date)
-        redis.zadd('graph-values', time_stamp, ponpe_cnt)
+        redis.rpush('graph-labels', last_date)
+        redis.rpush('graph-values', ponpe_cnt)
 
         # ポンペ数を初期化
         redis.set('ponpe-cnt', 0)
 
-        # 最大格納数を超える場合は削除
-        redis.zremrangebyrank('graph-labels', 0, -(MAX_COUNT + 1))
-        redis.zremrangebyrank('graph-values', 0, -(MAX_COUNT + 1))
-
+        # 最大格納数を超える場合は一番古いデータを削除
+        if trim_start_index = redis.llen('graph-labels') - MAX_COUNT
+          redis.ltrim('graph-labels', trim_start_index, MAX_COUNT - 1)
+          redis.ltrim('graph-values', trim_start_index, MAX_COUNT - 1)
+        end
       end
 
       # since_idを取得
