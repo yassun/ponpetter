@@ -23,6 +23,9 @@ describe "App" do
       ]
       mr.set('tweets', Marshal.dump(tweets))
 
+      mr.rpush('graph-labels', "2015-01-31")
+      mr.rpush('graph-values', 200)
+
       allow(Ponpetter::Redis).to receive(:connect).and_return(mr)
     end
 
@@ -36,7 +39,7 @@ describe "App" do
     end
 
     it 'ツイート合計数が表示されていること' do
-      expect(subject.body).to include '<h2>只今のポンペ数 100人</h2>'
+      expect(subject.body).to include '<h2>本日のポンペ数 100人</h2>'
     end
 
     it 'ユーザーの画像が表示されていること' do
