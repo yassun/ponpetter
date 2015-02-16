@@ -42,6 +42,11 @@ describe "App" do
       expect(subject.body).to include '<h2>本日のポンペ数 100人</h2>'
     end
 
+    it 'グラフ用の値が設定されていること' do
+      expect(subject.body).to include 'labels : ["2015-01-31"]'
+      expect(subject.body).to include 'data : ["200"]'
+    end
+
     it 'ユーザーの画像が表示されていること' do
       expect(subject.body).to include '<img src="http://pbs.twimg.com/profile_images/img/xxxxx.jpeg">'
     end
