@@ -14,8 +14,6 @@ gem 'sass'
 
 gem 'unicorn'
 
-gem 'whenever', :require => false
-
 group :development, :test do
   gem 'rspec'
   gem 'mock_redis'
