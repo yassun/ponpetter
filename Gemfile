@@ -13,6 +13,7 @@ gem 'haml'
 gem 'sass'
 
 gem 'unicorn'
+gem 'eventmachine'
 
 group :development, :test do
   gem 'rspec'

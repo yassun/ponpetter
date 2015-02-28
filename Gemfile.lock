@@ -7,6 +7,7 @@ GEM
     diff-lcs (1.2.5)
     dotenv (1.0.2)
     equalizer (0.0.9)
+    eventmachine (1.0.7)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
     haml (4.0.6)
@@ -80,6 +81,7 @@ PLATFORMS
 
 DEPENDENCIES
   dotenv
+  eventmachine
   haml
   mock_redis
   rake
