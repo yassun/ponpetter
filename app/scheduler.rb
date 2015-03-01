@@ -44,12 +44,15 @@ module Ponpetter
       redis.set('ponpe-cnt', ponpe_cnt)
 
       # tweetの更新(最新100件のみ表示)
-      old_tweets = Marshal.load(redis.get("tweets"))
+      old_tweets = []
+      if redis.get("tweets")
+        old_tweets = Marshal.load(redis.get("tweets"))
+      end
       new_tweets += old_tweets
       redis.set("tweets",  Marshal.dump(new_tweets.first(100)))
 
       # since_idの更新
-      since_id = new_tweets.first[:id] || 0
+      since_id = new_tweets.first[:id] || ENV["INIT_SINCE_ID"]
       redis.set('since-id', since_id)
 
       # 処理日付の変更
