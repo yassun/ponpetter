@@ -35,17 +35,21 @@ module Ponpetter
       # since_idを取得
       since_id = redis.get('since-id') || 0
 
-      # tweetの更新
-      tweets = TweetSearch.new(since_id).run
-      redis.set("tweets",  Marshal.dump(tweets))
+      # tweetの取得
+      new_tweets = TweetSearch.new(since_id).run
 
       # ポンペ数の更新
       ponpe_cnt = redis.get('ponpe-cnt') || 0
-      ponpe_cnt = ponpe_cnt.to_i + tweets.length
+      ponpe_cnt = ponpe_cnt.to_i + new_tweets.length
       redis.set('ponpe-cnt', ponpe_cnt)
 
+      # tweetの更新(最新100件のみ表示)
+      old_tweets = Marshal.load(redis.get("tweets"))
+      new_tweets += old_tweets
+      redis.set("tweets",  Marshal.dump(new_tweets.first(100)))
+
       # since_idの更新
-      since_id = tweets.first[:id] || 0
+      since_id = new_tweets.first[:id] || 0
       redis.set('since-id', since_id)
 
       # 処理日付の変更

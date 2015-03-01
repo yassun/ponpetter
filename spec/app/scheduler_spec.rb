@@ -18,6 +18,7 @@ describe "Scheduler" do
 
     # redis
     allow(Ponpetter::Redis).to receive(:connect).and_return(mr)
+    mr.set('tweets',Marshal.dump(tweets))
 
     # twitter
     twitter_client_mock = double('Twitter client')
@@ -41,8 +42,9 @@ describe "Scheduler" do
         expect(mr.get('since-id')).to eq "1234567890"
       end
 
-      it "tweetが保存されていること" do
-        expect(Marshal.load(mr.get('tweets'))).to eq tweets
+      it "tweetが追加保存されていること" do
+        append = tweets + tweets
+        expect(Marshal.load(mr.get('tweets'))).to eq append
       end
 
       it "ポンペ数が更新されていること" do
