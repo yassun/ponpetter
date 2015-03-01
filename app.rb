@@ -8,6 +8,10 @@ configure :development, :test do
   Dotenv.load
 end
 
+configure :production do
+  require 'newrelic_rpm'
+end
+
 # root
 get '/' do
 

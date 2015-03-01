@@ -15,6 +15,8 @@ gem 'sass'
 gem 'unicorn'
 gem 'eventmachine'
 
+gem 'newrelic_rpm'
+
 group :development, :test do
   gem 'rspec'
   gem 'mock_redis'
