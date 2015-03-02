@@ -4,10 +4,7 @@ require File.dirname(__FILE__) + '/tweet_search.rb'
 module Ponpetter
   class Scheduler
     MAX_COUNT = 365
-    def self.execute
-      # redisに接続
-      redis = Ponpetter::Redis.connect
-
+    def self.execute(redis)
      # 処理日付の取得
       today = Date.today.to_s
 
