@@ -17,7 +17,6 @@ describe "Scheduler" do
     allow(Date).to receive(:today).and_return(Date.new(2015, 2, 1))
 
     # redis
-    allow(Ponpetter::Redis).to receive(:connect).and_return(mr)
     mr.set('tweets',Marshal.dump(tweets))
 
     # twitter
@@ -31,7 +30,7 @@ describe "Scheduler" do
 
     context "日替わり未発生" do
       before do
-        Ponpetter::Scheduler.execute
+        Ponpetter::Scheduler.execute(mr)
       end
 
       it "前回処理日付に今日の日付が設定されていること" do
@@ -58,7 +57,7 @@ describe "Scheduler" do
         before do
           mr.set('last-date','2014-01-31')
           mr.set('ponpe-cnt','100')
-          Ponpetter::Scheduler.execute
+          Ponpetter::Scheduler.execute(mr)
         end
 
         it "グラフのラベルが追加されていること" do
@@ -83,7 +82,7 @@ describe "Scheduler" do
             mr.rpush('graph-values', cnt)
           end
 
-          Ponpetter::Scheduler.execute
+          Ponpetter::Scheduler.execute(mr)
           expect(mr.lpop('graph-labels')).to eq '1'
           expect(mr.lpop('graph-values')).to eq '1'
         end
