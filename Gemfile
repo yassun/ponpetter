@@ -16,6 +16,8 @@ gem 'unicorn'
 gem 'eventmachine'
 
 gem 'newrelic_rpm'
+gem 'travis'
+gem 'travis-lint'
 
 group :development, :test do
   gem 'rspec'
