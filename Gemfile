@@ -3,6 +3,7 @@ ruby '2.1.5'
 
 gem 'sinatra'
 gem 'sinatra-contrib'
+
 gem 'rake'
 gem 'redis-objects'
 
@@ -12,7 +13,7 @@ gem 'twitter'
 gem 'haml'
 gem 'sass'
 
-gem 'unicorn'
+gem "faye-websocket"
 gem 'eventmachine'
 
 gem 'newrelic_rpm'
