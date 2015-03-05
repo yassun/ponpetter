@@ -1,6 +1,5 @@
 require 'sinatra'
 require 'logger'
-require 'unicorn'
 require File.join(File.dirname(__FILE__), 'app', 'redis.rb')
 
 configure :development, :test do
