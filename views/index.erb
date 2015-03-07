@@ -31,7 +31,7 @@
               data : <%= @graph[:values] %>
             }
           ]
-        }
+        };
 
         var ctx = document.getElementById("myChart").getContext("2d");
         new Chart(ctx).Line(data,{
@@ -59,7 +59,39 @@
           animationEasing : "easeOutQuart",
           onAnimationComplete : null
         });
-        });
+
+        var $tweets = $('.tweets');
+        var $ponpe_cnt = $('.ponpe-cnt');
+
+        function getTweetItem(data) {
+          var $div = $('<div class="col-lg-12 tweet">').html([
+            '<span class="img"><img src="' + data.img + '"></span>',
+            '<span class="autor"><a href="https://twitter.com/' + data.autor + '" target="_blank">@' + data.autor + '</a></span>',
+            '<span class="body">' + data.text + '</span>',
+            '<span class="time"><a href="https://twitter.com/' + data.autor + '/status/' + data.id + '" target="_blank">' + data.time + '</a></span>',
+          ].join(''));
+          return $div;
+        }
+
+        var ws = new WebSocket('ws://' + window.document.location.host);
+        ws.onmessage = function(e) {
+          var data = JSON.parse(e.data);
+          console.log(data);
+
+          // ポンペ数の更新
+          $ponpe_cnt.hide().empty().html(data.ponpe_cnt).fadeIn();
+
+          // ツイート一覧の更新
+          $tweets.hide().empty();
+          data.tweets.forEach(function(tweet) {
+            var $div = getTweetItem(tweet);
+            $tweets.append($div);
+          });
+          $tweets.fadeIn();
+
+        };
+
+    });
   </script>
 
 </head>
@@ -72,7 +104,7 @@
       </div>
 
       <div class="counter text-center">
-        <h2>本日のポンペ数 <%= @ponpe_cnt %>人</h2>
+        <h2>本日のポンペ数 <span class="ponpe-cnt"><%= @ponpe_cnt %>人</span></h2>
       </div>
 
       <div id="chart" class="text-center">
