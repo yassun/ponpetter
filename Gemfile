@@ -13,6 +13,7 @@ gem 'twitter'
 gem 'haml'
 gem 'sass'
 
+gem 'thin'
 gem "faye-websocket"
 gem 'eventmachine'
 
