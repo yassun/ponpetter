@@ -58,8 +58,16 @@ var Container = React.createClass({displayName: "Container",
     });
 
   },
+  onMessageWs : function () {
+    var ws = new WebSocket('ws://' + window.document.location.host);
+    ws.onmessage = function(e) {
+      var data = JSON.parse(e.data);
+      this.setState({data: data});
+    }.bind(this);
+  },
   componentDidMount: function() {
     this.loadPonpeFromServer();
+    this.onMessageWs();
   },
 
   render: function() {
@@ -102,7 +110,6 @@ var PonpeCnt = React.createClass({displayName: "PonpeCnt",
 });
 
 var Graph = React.createClass({displayName: "Graph",
-
   render: function() {
     return (
       React.createElement("div", {id: "chart", className: "text-center"}, 

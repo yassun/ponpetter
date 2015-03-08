@@ -58,8 +58,16 @@ var Container = React.createClass({
     });
 
   },
+  onMessageWs : function () {
+    var ws = new WebSocket('ws://' + window.document.location.host);
+    ws.onmessage = function(e) {
+      var data = JSON.parse(e.data);
+      this.setState({data: data});
+    }.bind(this);
+  },
   componentDidMount: function() {
     this.loadPonpeFromServer();
+    this.onMessageWs();
   },
 
   render: function() {
@@ -102,7 +110,6 @@ var PonpeCnt = React.createClass({
 });
 
 var Graph = React.createClass({
-
   render: function() {
     return (
       <div id="chart" className="text-center">
