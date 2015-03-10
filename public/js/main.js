@@ -90,8 +90,8 @@ var Header = React.createClass({displayName: "Header",
       React.createElement("div", {className: "header"}, 
         React.createElement("h3", {className: "text-muted"}, 
             "Ponpetter", 
-            React.createElement("span", {className: "pull-right"}, 
-                "by ", React.createElement("a", {href: "https://twitter.com/_yasuun_", target: "_blank"}, "@_Yasuun_")
+            React.createElement("span", {className: "pull-right user-name"}, 
+                React.createElement("a", {href: "https://twitter.com/_yasuun_", target: "_blank"}, "by @_Yasuun_")
             )
         )
       )

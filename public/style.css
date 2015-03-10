@@ -1,3 +1,12 @@
+body {
+  background-color: #f8f5ec;
+  background-image: url(ponpe.gif);
+}
+
+.container {
+  background: #f7f7f7;
+}
+
 .tweets {
   height: 800px;
   overflow: scroll;
@@ -36,7 +45,7 @@
   padding: 25px 0 0 70px;
 }
 
-body > div.container > div.header > h3 > span {
+#content > div > div.header > h3 > span.user-name{
     font-size: 14px;
 }
 
@@ -44,4 +53,5 @@ body > div.container > div.header > h3 > span {
   text-align: center;
   padding-top: 10px;
 }
+
 

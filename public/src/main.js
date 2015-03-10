@@ -90,8 +90,8 @@ var Header = React.createClass({
       <div className="header">
         <h3 className="text-muted">
             Ponpetter
-            <span className="pull-right">
-                by <a href="https://twitter.com/_yasuun_" target="_blank">@_Yasuun_</a>
+            <span className="pull-right user-name">
+                <a href="https://twitter.com/_yasuun_" target="_blank">by @_Yasuun_</a>
             </span>
         </h3>
       </div>
