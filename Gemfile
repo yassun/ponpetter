@@ -24,5 +24,7 @@ gem 'travis-lint'
 group :development, :test do
   gem 'rspec'
   gem 'mock_redis'
+  gem 'capybara'
+  gem 'poltergeist'
 end
 
