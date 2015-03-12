@@ -5,7 +5,7 @@ before_script:
   - git clone git://github.com/ariya/phantomjs.git
   - cd phantomjs
   - git checkout 2.0
-  - ./build.sh
+  - echo y | ./build.sh
   - sleep 5
 script:
   - bundle exec rspec spec
