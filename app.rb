@@ -21,8 +21,8 @@ get '/ponpe.json' do
      tweets: Marshal.load(redis.get("tweets")),
      ponpe_cnt: redis.get('ponpe-cnt'),
      graph: {
-       labels:redis.lrange('graph-labels', 0, 30),
-       values:redis.lrange('graph-values', 0, 30)
+       labels:redis.lrange('graph-labels', -30, -1),
+       values:redis.lrange('graph-values', -30, -1)
      }
   }.to_json
 end
